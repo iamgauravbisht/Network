@@ -10,7 +10,10 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Header />
       <div className="w-full pb-12 pt-2 border-b flex flex-col justify-start items-center flex-1">
+        {/* if not logged in display this component */}
         {/* <Auth /> */}
+
+        {/* if looged in display this component */}
         <Home />
       </div>
       <Footer />
