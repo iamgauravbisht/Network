@@ -1,8 +1,11 @@
+import PostBox from "./PostBox";
+import Post from "./Post";
+
 export default function Feed() {
   return (
-    <div className="flex-1 ">
-      <div className="border rounded-xl mb-1">post daily update or story </div>
-      <div className="border">Feed</div>
+    <div className="flex-1">
+      <PostBox />
+      <Post />
     </div>
   );
 }

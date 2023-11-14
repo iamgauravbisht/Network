@@ -16,12 +16,12 @@ function App() {
       if (data.errors) {
         dispatch({ type: "SET_APPSTATE", payload: "auth" });
       } else {
+        dispatch({ type: "SET_APPSTATE", payload: "home" });
         dispatch({
           type: "SET_USER",
           payload: { username: data.user.username, email: data.user.email },
         });
         dispatch({ type: "SET_USER_ID", payload: data.user._id });
-        dispatch({ type: "SET_APPSTATE", payload: "home" });
       }
     });
   }, [dispatch]);

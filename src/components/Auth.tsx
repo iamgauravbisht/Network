@@ -92,10 +92,13 @@ export default function Auth(): JSX.Element {
         }
       } else {
         // if there is no error, redirect the user to the home page
+        console.log("signup Handler data", data);
         if (data) {
-          window.location.href = "/";
+          document.cookie = `jwt=${
+            data.cookie
+          }; secure=true; samesite=strict; path=/; max-age=${60 * 60 * 24 * 7}`;
+          // window.location.href = "https://iamgauravbisht.github.io/network/";
         }
-
         // clear the input fields if the user is successfully signed up
         dispatch({ type: "SET_SIGNUP_USERNAME", payload: "" });
         dispatch({ type: "SET_SIGNUP_EMAIL", payload: "" });
@@ -132,8 +135,12 @@ export default function Auth(): JSX.Element {
       }
     }
     // if there is no error, redirect the user to the home page
-    if (data.user) {
-      window.location.href = "/";
+    if (data) {
+      console.log("login Handler data", data);
+      document.cookie = `jwt=${
+        data.cookie
+      }; secure=true; samesite=strict; path=/; max-age=${60 * 60 * 24 * 7}`;
+      // window.location.href = "https://iamgauravbisht.github.io/network/";
     }
 
     // clear the input fields if the user is successfully signed up

@@ -8,11 +8,11 @@ const Header = (): JSX.Element => {
 
   return (
     <header className="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur ">
-      <div className="container px-1 sm:px-8 flex h-14 items-center justify-between max-w-7xl">
+      <div className="container px-1 sm:px-2 flex h-14 items-center justify-between max-w-7xl gap-2">
         {/* if user not logged in */}
         {state.appState === "auth" ? (
           <>
-            <h2 className="text-xl font-bold tracking-tight">-+-Network-+-</h2>
+            <h2 className="text-xl font-bold tracking-tight ">-+-Network-+-</h2>
             <ModeToggle />
           </>
         ) : null}
@@ -20,10 +20,14 @@ const Header = (): JSX.Element => {
         {/* logedin state  */}
         {state.appState === "home" ? (
           <>
-            <Account />
+            <h2 className="text-xl font-bold tracking-tight hidden md:block">
+              -+-Network-+-
+            </h2>
+
+            <SearchBox />
             <div className="flex items-center justify-between gap-2">
-              <SearchBox />
               <ModeToggle />
+              <Account />
             </div>
           </>
         ) : null}

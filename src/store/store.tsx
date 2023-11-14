@@ -2,6 +2,8 @@ import React, { createContext, useReducer } from "react";
 
 type IState = {
   appState: "auth" | "editor" | "home";
+  chatState: "chat" | "chatroom" | "profile" | "nothing";
+  homeState: "feed" | "profile" | "settings" | "draft";
   loginEmail: string;
   loginPassword: string;
   signupEmail: string;
@@ -25,6 +27,8 @@ type IState = {
 };
 const initialState: IState = {
   appState: "auth",
+  chatState: "nothing",
+  homeState: "feed",
   loginEmail: "",
   loginPassword: "",
   signupEmail: "",
@@ -94,7 +98,9 @@ type Action =
   | {
       type: "SET_CURRENT_DOCUMENT_OWNER";
       payload: IState["currentDocumentOwner"];
-    };
+    }
+  | { type: "SET_CHAT_STATE"; payload: IState["chatState"] }
+  | { type: "SET_HOME_STATE"; payload: IState["homeState"] };
 
 function reducer(state: typeof initialState, action: Action) {
   switch (action.type) {
@@ -134,6 +140,10 @@ function reducer(state: typeof initialState, action: Action) {
       return { ...state, user: action.payload };
     case "SET_CURRENT_DOCUMENT_OWNER":
       return { ...state, currentDocumentOwner: action.payload };
+    case "SET_CHAT_STATE":
+      return { ...state, chatState: action.payload };
+    case "SET_HOME_STATE":
+      return { ...state, homeState: action.payload };
     default:
       return state;
   }

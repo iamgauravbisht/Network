@@ -10,11 +10,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import imgSrc from "@/assets/vite.svg";
-import { logout } from "@/controller/authController";
 
 export function Account(): JSX.Element {
+  function deleteJwtCookie() {
+    // Set the cookie to expire in the past
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+
   const logoutHandler = () => {
-    logout();
+    deleteJwtCookie();
     window.location.reload();
   };
 

@@ -1,3 +1,20 @@
+function getCookie(cookieName: string) {
+  const name = cookieName + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(";");
+
+  for (let i = 0; i < cookieArray.length; i++) {
+    let cookie = cookieArray[i];
+    while (cookie.charAt(0) === " ") {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return "";
+}
+
 const signup_post = async (
   username: string,
   email: string,
@@ -12,9 +29,10 @@ const signup_post = async (
 };
 
 const verifyAuth = async () => {
-  return await fetch("http://localhost:3000/verifyAuth", {
+  const jwtValue = getCookie("jwt");
+
+  return await fetch(`http://localhost:3000/verifyAuth?jwt=${jwtValue}`, {
     method: "GET",
-    credentials: "include",
     headers: { "Content-Type": "application/json" },
   }).then((res) => res.json());
 };
@@ -28,22 +46,63 @@ const login_post = async (email: string, password: string) => {
   }).then((res) => res.json());
 };
 
-const logout = async () => {
-  return await fetch("http://localhost:3000/logout", {
-    method: "GET",
-    credentials: "include",
+const Me = async (userId: string) => {
+  return await fetch(`http://localhost:3000/me`, {
+    method: "POST",
+    body: JSON.stringify({ userId }),
     headers: { "Content-Type": "application/json" },
   }).then((res) => res.json());
 };
 
-const Me = async () => {
-  return await fetch(`http://localhost:3000/me`, {
-    method: "GET",
+const updateBio = async (userId: string, bio: string) => {
+  return await fetch(`http://localhost:3000/updateBio`, {
+    method: "POST",
     credentials: "include",
+    body: JSON.stringify({ bio, userId }),
     headers: { "Content-Type": "application/json" },
   }).then((res) => {
     return res.json();
   });
 };
 
-export { signup_post, login_post, Me, verifyAuth, logout };
+const draft = async (post: string, userId: string) => {
+  return await fetch(`http://localhost:3000/draft`, {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify({ post, userId }),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => {
+    return res.json();
+  });
+};
+const getDraft = async (userId: string) => {
+  return await fetch(`http://localhost:3000/getDraft`, {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify({ userId }),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => {
+    return res.json();
+  });
+};
+const deleteDraft = async (userId: string, draftId: string) => {
+  return await fetch(`http://localhost:3000/deleteDraft`, {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify({ userId, draftId }),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => {
+    return res.json();
+  });
+};
+
+export {
+  signup_post,
+  login_post,
+  Me,
+  verifyAuth,
+  updateBio,
+  draft,
+  getDraft,
+  deleteDraft,
+};
