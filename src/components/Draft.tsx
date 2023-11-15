@@ -8,13 +8,14 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { getDraft, deleteDraft } from "@/controller/authController";
+import { getDraft, deleteDraft, createPost } from "@/controller/authController";
 import useMyContext from "../store/useMyContext";
 
 type Draft = {
   _id: string;
   post: string;
 };
+
 export default function Draft() {
   const { state } = useMyContext();
   const [drafts, setDrafts] = useState<Draft[]>([]);
@@ -33,7 +34,24 @@ export default function Draft() {
       console.log(err);
     }
   };
-  // const postDraft = (id: string) => {};
+  const postDraft = async (_id: string, post: string) => {
+    //create post
+    try {
+      const result = await createPost(
+        post,
+        state.userId,
+        state.user.username,
+        _id
+      );
+      //delete draft
+      if (result) {
+        await remove(_id);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     Drafts();
   }, []);
@@ -59,7 +77,7 @@ export default function Draft() {
                   </Button>
                   <Button
                     variant={"secondary"}
-                    //  onClick={postDraft(draft._id)}
+                    onClick={() => postDraft(draft._id, draft.post)}
                   >
                     Post
                   </Button>

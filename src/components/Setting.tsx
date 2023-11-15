@@ -21,8 +21,8 @@ export default function Setting() {
       <CardContent>
         <p>Delete you account</p>
         <p>
-          to delete type your <strong>Name</strong> in the input and click on
-          delete.
+          to delete type your <strong>userName</strong> in the input and click
+          on delete.
         </p>
         <Input className="my-5" />
         <Button variant="destructive">Delete</Button>

@@ -1,19 +1,19 @@
-function getCookie(cookieName: string) {
-  const name = cookieName + "=";
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const cookieArray = decodedCookie.split(";");
+// function getCookie(cookieName: string) {
+//   const name = cookieName + "=";
+//   const decodedCookie = decodeURIComponent(document.cookie);
+//   const cookieArray = decodedCookie.split(";");
 
-  for (let i = 0; i < cookieArray.length; i++) {
-    let cookie = cookieArray[i];
-    while (cookie.charAt(0) === " ") {
-      cookie = cookie.substring(1);
-    }
-    if (cookie.indexOf(name) === 0) {
-      return cookie.substring(name.length, cookie.length);
-    }
-  }
-  return "";
-}
+//   for (let i = 0; i < cookieArray.length; i++) {
+//     let cookie = cookieArray[i];
+//     while (cookie.charAt(0) === " ") {
+//       cookie = cookie.substring(1);
+//     }
+//     if (cookie.indexOf(name) === 0) {
+//       return cookie.substring(name.length, cookie.length);
+//     }
+//   }
+//   return "";
+// }
 
 const signup_post = async (
   username: string,
@@ -22,17 +22,15 @@ const signup_post = async (
 ) => {
   return await fetch("http://localhost:3000/signup", {
     method: "POST",
-    credentials: "include",
     body: JSON.stringify({ username, email, password }),
     headers: { "Content-Type": "application/json" },
   }).then((res) => res.json());
 };
 
 const verifyAuth = async () => {
-  const jwtValue = getCookie("jwt");
-
-  return await fetch(`http://localhost:3000/verifyAuth?jwt=${jwtValue}`, {
+  return await fetch(`http://localhost:3000/verifyAuth`, {
     method: "GET",
+    credentials: "include",
     headers: { "Content-Type": "application/json" },
   }).then((res) => res.json());
 };
@@ -40,7 +38,6 @@ const verifyAuth = async () => {
 const login_post = async (email: string, password: string) => {
   return await fetch("http://localhost:3000/login", {
     method: "POST",
-    credentials: "include",
     body: JSON.stringify({ email, password }),
     headers: { "Content-Type": "application/json" },
   }).then((res) => res.json());
@@ -57,7 +54,6 @@ const Me = async (userId: string) => {
 const updateBio = async (userId: string, bio: string) => {
   return await fetch(`http://localhost:3000/updateBio`, {
     method: "POST",
-    credentials: "include",
     body: JSON.stringify({ bio, userId }),
     headers: { "Content-Type": "application/json" },
   }).then((res) => {
@@ -68,7 +64,6 @@ const updateBio = async (userId: string, bio: string) => {
 const draft = async (post: string, userId: string) => {
   return await fetch(`http://localhost:3000/draft`, {
     method: "POST",
-    credentials: "include",
     body: JSON.stringify({ post, userId }),
     headers: { "Content-Type": "application/json" },
   }).then((res) => {
@@ -78,7 +73,6 @@ const draft = async (post: string, userId: string) => {
 const getDraft = async (userId: string) => {
   return await fetch(`http://localhost:3000/getDraft`, {
     method: "POST",
-    credentials: "include",
     body: JSON.stringify({ userId }),
     headers: { "Content-Type": "application/json" },
   }).then((res) => {
@@ -88,8 +82,31 @@ const getDraft = async (userId: string) => {
 const deleteDraft = async (userId: string, draftId: string) => {
   return await fetch(`http://localhost:3000/deleteDraft`, {
     method: "POST",
-    credentials: "include",
     body: JSON.stringify({ userId, draftId }),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => {
+    return res.json();
+  });
+};
+
+const createPost = async (
+  post: string,
+  userId: string,
+  username: string,
+  _id: string
+) => {
+  return await fetch(`http://localhost:3000/createPost`, {
+    method: "POST",
+    body: JSON.stringify({ post, userId, username, _id }),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => {
+    return res.json();
+  });
+};
+const getPosts = async (start: number, end: number) => {
+  return await fetch(`http://localhost:3000/getPosts`, {
+    method: "POST",
+    body: JSON.stringify({ start, end }),
     headers: { "Content-Type": "application/json" },
   }).then((res) => {
     return res.json();
@@ -105,4 +122,6 @@ export {
   draft,
   getDraft,
   deleteDraft,
+  createPost,
+  getPosts,
 };

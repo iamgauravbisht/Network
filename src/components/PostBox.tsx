@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { draft } from "@/controller/authController";
+import { draft, createPost } from "@/controller/authController";
 import useMyContext from "../store/useMyContext";
 
 export default function PostBox() {
@@ -25,7 +25,34 @@ export default function PostBox() {
       console.log(err);
     }
   };
-  const sendPost = async () => {};
+  function generateRandomString(length: number) {
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+    let randomString = "";
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * chars.length);
+      randomString += chars.charAt(randomIndex);
+    }
+
+    return randomString;
+  }
+  const sendPost = async () => {
+    try {
+      const _id = generateRandomString(30);
+      const result = await createPost(
+        postValue,
+        state.userId,
+        state.user.username,
+        _id
+      );
+      if (result) {
+        setPostValue("");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <Card className="mb-5">
       <CardContent className="mt-5">

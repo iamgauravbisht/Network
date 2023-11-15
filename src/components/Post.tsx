@@ -11,9 +11,17 @@ import imgSrc from "@/assets/vite.svg";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Heart, Link } from "lucide-react";
 
-export default function Post() {
+type Post = {
+  username: string;
+  post: string;
+  time: string;
+  venue: string;
+  postId: string;
+};
+
+export default function Post({ username, post, time, venue, postId }: Post) {
   return (
-    <Card>
+    <Card key={postId} className="mb-4">
       <CardHeader>
         <div className="flex flex-row gap-2 items-center relative mb-7">
           <Avatar className="cursor-pointer">
@@ -21,14 +29,14 @@ export default function Post() {
             <AvatarFallback>N</AvatarFallback>
           </Avatar>
           <div>
-            <CardTitle>Friend Name</CardTitle>
-            <CardDescription>last message</CardDescription>
+            <CardTitle>{username}</CardTitle>
+            <CardDescription>{venue}</CardDescription>
           </div>
-          <small className="absolute right-1 top-1">time</small>
+          <small className="absolute right-1 top-1">{time}</small>
         </div>
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        <p>{post}</p>
       </CardContent>
       <CardFooter>
         <Button variant={"ghost"}>
