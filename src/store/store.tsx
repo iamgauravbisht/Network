@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from "react";
 
 type IState = {
   appState: "auth" | "editor" | "home";
-  chatState: "chat" | "chatroom" | "profile" | "nothing";
+  chatState: "chat" | "chatroom" | "profile" | "friendList" | "nothing";
   homeState: "feed" | "profile" | "settings" | "draft";
   loginEmail: string;
   loginPassword: string;

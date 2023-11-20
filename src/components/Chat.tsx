@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Settings, Search, XCircle } from "lucide-react";
+import { MessageSquare, Contact, Search, XCircle } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -8,14 +8,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuLabel,
+//   DropdownMenuSeparator,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import imgSrc from "@/assets/vite.svg";
 import useMyContext from "../store/useMyContext";
@@ -25,6 +25,9 @@ export default function ChatBox() {
 
   const OpenChatHandler = () => {
     dispatch({ type: "SET_CHAT_STATE", payload: "chatroom" });
+  };
+  const OpendFriendList = () => {
+    dispatch({ type: "SET_CHAT_STATE", payload: "friendList" });
   };
   const closeChat = () => {
     dispatch({ type: "SET_CHAT_STATE", payload: "nothing" });
@@ -40,22 +43,10 @@ export default function ChatBox() {
           <Button variant="outline" size="icon">
             <Search size={48} className="h-4 w-4" />
           </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Button variant="outline" size="icon">
-                <Settings size={48} className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>New Group</DropdownMenuItem>
-              <DropdownMenuItem>Broadcast</DropdownMenuItem>
-              <DropdownMenuItem>Status</DropdownMenuItem>
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+
+          <Button variant="outline" size="icon" onClick={OpendFriendList}>
+            <Contact size={48} className="h-4 w-4" />
+          </Button>
         </div>
       </CardHeader>
       <CardContent>
