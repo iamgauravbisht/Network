@@ -20,17 +20,18 @@ export default function PeopleProfile() {
   const goToChatBox = () => {
     dispatch({ type: "SET_CHAT_STATE", payload: "chatroom" });
   };
+  const friendId =
+    state.userId == state.chatDocument?.user1
+      ? state.chatDocument?.user2
+      : state.chatDocument?.user1;
+
   useEffect(() => {
     async function Bio() {
-      const userId =
-        state.userId == state.chatDocument?.user1
-          ? state.chatDocument?.user2
-          : state.chatDocument?.user1;
-      const response = await getBio(userId);
+      const response = await getBio(friendId);
       setBio(response.bio);
     }
     Bio();
-  }, [state.chatDocument?.user1, state.chatDocument?.user2, state.userId]);
+  }, [friendId]);
 
   return (
     <Card className="w-full h-[500px] relative rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -43,17 +44,13 @@ export default function PeopleProfile() {
             <AvatarFallback>N</AvatarFallback>
           </Avatar>
           <div>
-            <CardTitle>Name of person</CardTitle>
-            <CardDescription>@User_Id</CardDescription>
+            <CardTitle>{state.chatName}</CardTitle>
+            <CardDescription>@{friendId}</CardDescription>
           </div>
-          <small className="absolute right-1 top-1">time</small>
         </div>
       </CardHeader>
       <CardContent className="h-[325px] flex flex-col gap-2 ">
-        <div className="flex flex-row justify-between">
-          <Button variant={"default"}>Send Friend Request</Button>
-        </div>
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row gap-4">
           <Button variant={"outline"}>
             <Ban className="h-4 w-4" />
           </Button>
