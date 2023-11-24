@@ -9,15 +9,29 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import imgSrc from "@/assets/vite.svg";
-import { MessageSquare, Copy, Ban, Heart } from "lucide-react";
+import { MessageSquare, Ban } from "lucide-react";
 import useMyContext from "../store/useMyContext";
+import { useEffect, useState } from "react";
+import { getBio } from "@/controller/authController";
 
 export default function PeopleProfile() {
-  const { dispatch } = useMyContext();
-
+  const { state, dispatch } = useMyContext();
+  const [bio, setBio] = useState<string>("");
   const goToChatBox = () => {
     dispatch({ type: "SET_CHAT_STATE", payload: "chatroom" });
   };
+  useEffect(() => {
+    async function Bio() {
+      const userId =
+        state.userId == state.chatDocument?.user1
+          ? state.chatDocument?.user2
+          : state.chatDocument?.user1;
+      const response = await getBio(userId);
+      setBio(response.bio);
+    }
+    Bio();
+  }, [state.chatDocument?.user1, state.chatDocument?.user2, state.userId]);
+
   return (
     <Card className="w-full h-[500px] relative rounded-lg border bg-card text-card-foreground shadow-sm">
       <div className="w-full h-[100px] rounded-t-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
@@ -41,13 +55,7 @@ export default function PeopleProfile() {
         </div>
         <div className="flex flex-row justify-between">
           <Button variant={"outline"}>
-            <Copy className="h-4 w-4" />
-          </Button>
-          <Button variant={"outline"}>
             <Ban className="h-4 w-4" />
-          </Button>
-          <Button variant={"outline"}>
-            <Heart className="h-4 w-4" />
           </Button>
           <Button variant={"outline"} onClick={goToChatBox}>
             <MessageSquare className="h-4 w-4" />
@@ -55,27 +63,8 @@ export default function PeopleProfile() {
         </div>
         <div className="overflow-y-scroll h-full mt-2">
           <ul className="list-none text-justify leading-5  ">
-            <li className="mb-1">Details</li>
-            <li className="mb-1">
-              Bio: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Atque laboriosam quae
-            </li>
-            <li className="mb-1">No.of freinds: 45</li>
-            <li className="mb-1">No.of posts: 45</li>
-            <li className="mb-1">Details</li>
-            <li className="mb-1">
-              Bio: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Atque laboriosam quae
-            </li>
-            <li className="mb-1">No.of freinds: 45</li>
-            <li className="mb-1">No.of posts: 45</li>
-            <li className="mb-1">Details</li>
-            <li className="mb-1">
-              Bio: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Atque laboriosam quae
-            </li>
-            <li className="mb-1">No.of freinds: 45</li>
-            <li className="mb-1">No.of posts: 45</li>
+            <li className="mb-1">Bio</li>
+            <li className="mb-1">{bio}</li>
           </ul>
         </div>
       </CardContent>

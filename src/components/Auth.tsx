@@ -136,7 +136,7 @@ export default function Auth(): JSX.Element {
     }
     // if there is no error, redirect the user to the home page
     if (data) {
-      console.log("login Handler data", data);
+      // console.log("login Handler data", data);
       document.cookie = `jwt=${
         data.cookie
       }; secure=true; samesite=strict; path=/; max-age=${60 * 60 * 24 * 7}`;

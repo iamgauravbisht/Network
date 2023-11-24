@@ -75,11 +75,9 @@ export default function SearchBox(): JSX.Element {
       }
       const results: searchResults[] = await search(name, state.userId);
       setSearchResults(results);
-      console.log(results);
     }
     searchFriends();
   }, [name, state.userId]);
-  console.log(searchResults);
 
   return (
     <div className=" max-w-[600px] flex-1 min-w-[200px] flex justify-center items-center flex-col relative">

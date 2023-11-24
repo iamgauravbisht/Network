@@ -16,14 +16,16 @@ type IState = {
   signupUsernameError: string;
   loginEmailError: string;
   loginPasswordError: string;
-  currentDocumentId: string;
-  currentDocumentName: string;
-  currentDocumentOwner: string;
   userId: string;
   user: {
     username: string;
     email: string;
   };
+  chatDocument: {
+    user1: string;
+    user2: string;
+  };
+  chatName: string;
 };
 const initialState: IState = {
   appState: "auth",
@@ -41,14 +43,16 @@ const initialState: IState = {
   signupUsernameError: "",
   loginEmailError: "",
   loginPasswordError: "",
-  currentDocumentId: "",
-  currentDocumentName: "",
   userId: "",
   user: {
     username: "",
     email: "",
   },
-  currentDocumentOwner: "",
+  chatDocument: {
+    user1: "",
+    user2: "",
+  },
+  chatName: "",
 };
 
 // Define the context type
@@ -85,22 +89,15 @@ type Action =
     }
   | { type: "SET_LOGIN_EMAIL_ERROR"; payload: IState["loginEmailError"] }
   | { type: "SET_LOGIN_PASSWORD_ERROR"; payload: IState["loginPasswordError"] }
-  | { type: "SET_CREATE_DOCUMENT_ID"; payload: IState["currentDocumentId"] }
   | { type: "SET_USER_ID"; payload: IState["userId"] }
-  | {
-      type: "SET_CURRENT_DOCUMENT_NAME";
-      payload: IState["currentDocumentName"];
-    }
   | {
       type: "SET_USER";
       payload: IState["user"];
     }
-  | {
-      type: "SET_CURRENT_DOCUMENT_OWNER";
-      payload: IState["currentDocumentOwner"];
-    }
   | { type: "SET_CHAT_STATE"; payload: IState["chatState"] }
-  | { type: "SET_HOME_STATE"; payload: IState["homeState"] };
+  | { type: "SET_HOME_STATE"; payload: IState["homeState"] }
+  | { type: "SET_CHAT_DOCUMENT"; payload: IState["chatDocument"] }
+  | { type: "SET_CHAT_NAME"; payload: IState["chatName"] };
 
 function reducer(state: typeof initialState, action: Action) {
   switch (action.type) {
@@ -130,20 +127,18 @@ function reducer(state: typeof initialState, action: Action) {
       return { ...state, loginEmailError: action.payload };
     case "SET_LOGIN_PASSWORD_ERROR":
       return { ...state, loginPasswordError: action.payload };
-    case "SET_CREATE_DOCUMENT_ID":
-      return { ...state, currentDocumentId: action.payload };
     case "SET_USER_ID":
       return { ...state, userId: action.payload };
-    case "SET_CURRENT_DOCUMENT_NAME":
-      return { ...state, currentDocumentName: action.payload };
     case "SET_USER":
       return { ...state, user: action.payload };
-    case "SET_CURRENT_DOCUMENT_OWNER":
-      return { ...state, currentDocumentOwner: action.payload };
     case "SET_CHAT_STATE":
       return { ...state, chatState: action.payload };
     case "SET_HOME_STATE":
       return { ...state, homeState: action.payload };
+    case "SET_CHAT_DOCUMENT":
+      return { ...state, chatDocument: action.payload };
+    case "SET_CHAT_NAME":
+      return { ...state, chatName: action.payload };
     default:
       return state;
   }

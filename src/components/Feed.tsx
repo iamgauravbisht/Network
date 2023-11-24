@@ -33,7 +33,6 @@ export default function Feed() {
           );
         });
         setPosts((prevPosts) => [...prevPosts, ...uniquePosts]);
-        console.log(posts);
         setPageNumber((prevPageNumber) => prevPageNumber + 2);
       } catch (error) {
         setError("Error fetching posts."); // Set the error state
@@ -51,10 +50,7 @@ export default function Feed() {
     const handleIntersection: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !loading && !error) {
-          console.log("Target is now visible!");
           fetchData();
-        } else {
-          console.log("Target is no longer visible!");
         }
       });
     };

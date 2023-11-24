@@ -61,6 +61,16 @@ const updateBio = async (userId: string, bio: string) => {
   });
 };
 
+const getBio = async (userId: string) => {
+  return await fetch(`http://localhost:3000/Bio`, {
+    method: "POST",
+    body: JSON.stringify({ userId }),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => {
+    return res.json();
+  });
+};
+
 const draft = async (post: string, userId: string) => {
   return await fetch(`http://localhost:3000/draft`, {
     method: "POST",
@@ -119,6 +129,7 @@ export {
   Me,
   verifyAuth,
   updateBio,
+  getBio,
   draft,
   getDraft,
   deleteDraft,

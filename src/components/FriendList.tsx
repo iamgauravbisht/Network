@@ -1,12 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  MessageSquare,
-  Contact,
-  Search,
-  XCircle,
-  Check,
-  X,
-} from "lucide-react";
+import { MessageSquare, Undo, Search, XCircle, Check, X } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -46,8 +39,8 @@ export default function FriendList() {
   const [recievedList, setRecievedList] = useState<FriendList[]>([]);
   const [sentList, setSentList] = useState<FriendList[]>([]);
 
-  const OpendFriendList = () => {
-    dispatch({ type: "SET_CHAT_STATE", payload: "friendList" });
+  const OpenChatList = () => {
+    dispatch({ type: "SET_CHAT_STATE", payload: "chat" });
   };
   const closeChat = () => {
     dispatch({ type: "SET_CHAT_STATE", payload: "nothing" });
@@ -63,7 +56,7 @@ export default function FriendList() {
         setFriendList((prev) => [...prev, { id, username }]);
       }
     } else {
-      console.log("error :", result.error);
+      // console.log("error :", result.error);
     }
   };
   const rejectRequest = async (id: string) => {
@@ -71,7 +64,7 @@ export default function FriendList() {
     if (result.message.includes("rejected")) {
       setRecievedList((prev) => prev.filter((item) => item.id !== id));
     } else {
-      console.log("error :", result.error);
+      // console.log("error :", result.error);
     }
   };
 
@@ -93,9 +86,7 @@ export default function FriendList() {
     getRecieved();
     getSent();
   }, [state.userId]);
-  console.log("friendList", friendList);
-  console.log("recievedList", recievedList);
-  console.log("sentList", sentList);
+
   return (
     <Card className="w-full h-[500px] relative rounded-lg border bg-card text-card-foreground shadow-sm">
       <CardHeader className="flex flex-row justify-between items-center">
@@ -107,8 +98,8 @@ export default function FriendList() {
           <Button variant="outline" size="icon">
             <Search size={48} className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" onClick={OpendFriendList}>
-            <Contact size={48} className="h-4 w-4" />
+          <Button variant="outline" size="icon" onClick={OpenChatList}>
+            <Undo size={48} className="h-4 w-4" />
           </Button>
         </div>
       </CardHeader>
