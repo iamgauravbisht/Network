@@ -1,26 +1,11 @@
-// function getCookie(cookieName: string) {
-//   const name = cookieName + "=";
-//   const decodedCookie = decodeURIComponent(document.cookie);
-//   const cookieArray = decodedCookie.split(";");
 
-//   for (let i = 0; i < cookieArray.length; i++) {
-//     let cookie = cookieArray[i];
-//     while (cookie.charAt(0) === " ") {
-//       cookie = cookie.substring(1);
-//     }
-//     if (cookie.indexOf(name) === 0) {
-//       return cookie.substring(name.length, cookie.length);
-//     }
-//   }
-//   return "";
-// }
 
 const signup_post = async (
   username: string,
   email: string,
   password: string
 ) => {
-  return await fetch("http://localhost:3000/signup", {
+  return await fetch("https://network-server-97072ea56d38.herokuapp.com/signup", {
     method: "POST",
     body: JSON.stringify({ username, email, password }),
     headers: { "Content-Type": "application/json" },
@@ -28,7 +13,7 @@ const signup_post = async (
 };
 
 const verifyAuth = async () => {
-  return await fetch(`http://localhost:3000/verifyAuth`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/verifyAuth`, {
     method: "GET",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
@@ -36,7 +21,7 @@ const verifyAuth = async () => {
 };
 
 const login_post = async (email: string, password: string) => {
-  return await fetch("http://localhost:3000/login", {
+  return await fetch("https://network-server-97072ea56d38.herokuapp.com/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
     headers: { "Content-Type": "application/json" },
@@ -44,7 +29,7 @@ const login_post = async (email: string, password: string) => {
 };
 
 const Me = async (userId: string) => {
-  return await fetch(`http://localhost:3000/me`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/me`, {
     method: "POST",
     body: JSON.stringify({ userId }),
     headers: { "Content-Type": "application/json" },
@@ -52,7 +37,7 @@ const Me = async (userId: string) => {
 };
 
 const updateBio = async (userId: string, bio: string) => {
-  return await fetch(`http://localhost:3000/updateBio`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/updateBio`, {
     method: "POST",
     body: JSON.stringify({ bio, userId }),
     headers: { "Content-Type": "application/json" },
@@ -62,7 +47,7 @@ const updateBio = async (userId: string, bio: string) => {
 };
 
 const getBio = async (userId: string) => {
-  return await fetch(`http://localhost:3000/Bio`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/Bio`, {
     method: "POST",
     body: JSON.stringify({ userId }),
     headers: { "Content-Type": "application/json" },
@@ -72,7 +57,7 @@ const getBio = async (userId: string) => {
 };
 
 const draft = async (post: string, userId: string) => {
-  return await fetch(`http://localhost:3000/draft`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/draft`, {
     method: "POST",
     body: JSON.stringify({ post, userId }),
     headers: { "Content-Type": "application/json" },
@@ -81,7 +66,7 @@ const draft = async (post: string, userId: string) => {
   });
 };
 const getDraft = async (userId: string) => {
-  return await fetch(`http://localhost:3000/getDraft`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/getDraft`, {
     method: "POST",
     body: JSON.stringify({ userId }),
     headers: { "Content-Type": "application/json" },
@@ -90,7 +75,7 @@ const getDraft = async (userId: string) => {
   });
 };
 const deleteDraft = async (userId: string, draftId: string) => {
-  return await fetch(`http://localhost:3000/deleteDraft`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/deleteDraft`, {
     method: "POST",
     body: JSON.stringify({ userId, draftId }),
     headers: { "Content-Type": "application/json" },
@@ -105,7 +90,7 @@ const createPost = async (
   username: string,
   _id: string
 ) => {
-  return await fetch(`http://localhost:3000/createPost`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/createPost`, {
     method: "POST",
     body: JSON.stringify({ post, userId, username, _id }),
     headers: { "Content-Type": "application/json" },
@@ -114,7 +99,7 @@ const createPost = async (
   });
 };
 const getPosts = async (start: number, end: number) => {
-  return await fetch(`http://localhost:3000/getPosts`, {
+  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/getPosts`, {
     method: "POST",
     body: JSON.stringify({ start, end }),
     headers: { "Content-Type": "application/json" },
