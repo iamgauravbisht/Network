@@ -47,6 +47,40 @@ const rejectFriendRequest = async (userId: string, friendId: string) => {
     body: JSON.stringify({ userId, friendId }),
   }).then((res) => res.json());
 };
+const likePost = async (postId: string, userId: string) => {
+  return await fetch("http://localhost:3000/likepost", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ postId, userId }),
+  }).then((res) => res.json());
+};
+const unlikePost = async (postId: string, userId: string) => {
+  return await fetch("http://localhost:3000/unlikepost", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ postId, userId }),
+  }).then((res) => res.json());
+};
+const postComment = async (
+  postId: string,
+  userId: string,
+  username: string,
+  comment: string
+) => {
+  return await fetch("http://localhost:3000/postcomment", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ postId, comment, userId, username }),
+  }).then((res) => res.json());
+};
+const getComment = async (postId: string) => {
+  return await fetch("http://localhost:3000/getcomment", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ postId }),
+  }).then((res) => res.json());
+};
+
 export {
   search,
   sendFriendRequest,
@@ -55,4 +89,8 @@ export {
   sentFriendRequests,
   acceptFriendRequest,
   rejectFriendRequest,
+  unlikePost,
+  likePost,
+  postComment,
+  getComment,
 };

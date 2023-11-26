@@ -7,8 +7,10 @@ type POST = {
   username: string;
   post: string;
   date: Date;
+  time: string;
   venue: string;
   _id: string;
+  likes: string[];
 };
 export default function Feed() {
   const [posts, setPosts] = useState<POST[]>([]);
@@ -73,15 +75,16 @@ export default function Feed() {
       <PostBox />
       {posts.length > 0 &&
         posts.map((post) => {
-          const time = new Date(post.date).toLocaleString();
+          // const time = new Date(post.date).toLocaleString();
           return (
             <Post
               key={post._id} // Add a key prop
               username={post.username}
               post={post.post}
-              time={time}
+              time={post.time}
               venue={post.venue}
               postId={post._id}
+              likes={post.likes}
             />
           );
         })}
