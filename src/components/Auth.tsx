@@ -97,7 +97,7 @@ export default function Auth(): JSX.Element {
           document.cookie = `jwt=${
             data.cookie
           }; secure=true; samesite=strict; path=/; max-age=${60 * 60 * 24 * 7}`;
-          window.location.href = "https://tangerine-malabi-6f2a2a.netlify.app";
+          window.location.href = "https://iamgauravbisht.github.io/Network/";
         }
         // clear the input fields if the user is successfully signed up
         dispatch({ type: "SET_SIGNUP_USERNAME", payload: "" });
@@ -140,7 +140,7 @@ export default function Auth(): JSX.Element {
       document.cookie = `jwt=${
         data.cookie
       }; secure=true; samesite=strict; path=/; max-age=${60 * 60 * 24 * 7}`;
-      window.location.href = "https://tangerine-malabi-6f2a2a.netlify.app";
+      window.location.href = "https://iamgauravbisht.github.io/Network/";
     }
 
     // clear the input fields if the user is successfully signed up
