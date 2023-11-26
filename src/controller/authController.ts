@@ -1,4 +1,19 @@
+function getCookie(cookieName: string) {
+  const name = cookieName + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(";");
 
+  for (let i = 0; i < cookieArray.length; i++) {
+    let cookie = cookieArray[i];
+    while (cookie.charAt(0) === " ") {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return "";
+}
 
 const signup_post = async (
   username: string,
@@ -13,11 +28,22 @@ const signup_post = async (
 };
 
 const verifyAuth = async () => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/verifyAuth`, {
-    method: "GET",
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-  }).then((res) => res.json());
+  const jwtValue = getCookie("jwt");
+
+  if (jwtValue !== "") {
+    // Use the cookie value
+    console.log("Value of myCookie:", jwtValue);
+  } else {
+    // Cookie not found
+    console.log("myCookie not found.");
+  }
+  return await fetch(
+    `https://network-server-97072ea56d38.herokuapp.com/verifyAuth?jwt=${jwtValue}`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  ).then((res) => res.json());
 };
 
 const login_post = async (email: string, password: string) => {
