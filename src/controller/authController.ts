@@ -20,7 +20,7 @@ const signup_post = async (
   email: string,
   password: string
 ) => {
-  return await fetch("https://network-server-97072ea56d38.herokuapp.com/signup", {
+  return await fetch("https://networkserver-3ewc.onrender.com/signup", {
     method: "POST",
     body: JSON.stringify({ username, email, password }),
     headers: { "Content-Type": "application/json" },
@@ -38,7 +38,7 @@ const verifyAuth = async () => {
     console.log("myCookie not found.");
   }
   return await fetch(
-    `https://network-server-97072ea56d38.herokuapp.com/verifyAuth?jwt=${jwtValue}`,
+    `https://networkserver-3ewc.onrender.com/verifyAuth?jwt=${jwtValue}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -47,7 +47,7 @@ const verifyAuth = async () => {
 };
 
 const login_post = async (email: string, password: string) => {
-  return await fetch("https://network-server-97072ea56d38.herokuapp.com/login", {
+  return await fetch("https://networkserver-3ewc.onrender.com/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
     headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ const login_post = async (email: string, password: string) => {
 };
 
 const Me = async (userId: string) => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/me`, {
+  return await fetch(`https://networkserver-3ewc.onrender.com/me`, {
     method: "POST",
     body: JSON.stringify({ userId }),
     headers: { "Content-Type": "application/json" },
@@ -63,7 +63,7 @@ const Me = async (userId: string) => {
 };
 
 const updateBio = async (userId: string, bio: string) => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/updateBio`, {
+  return await fetch(`https://networkserver-3ewc.onrender.com/updateBio`, {
     method: "POST",
     body: JSON.stringify({ bio, userId }),
     headers: { "Content-Type": "application/json" },
@@ -73,7 +73,7 @@ const updateBio = async (userId: string, bio: string) => {
 };
 
 const getBio = async (userId: string) => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/Bio`, {
+  return await fetch(`https://networkserver-3ewc.onrender.com/Bio`, {
     method: "POST",
     body: JSON.stringify({ userId }),
     headers: { "Content-Type": "application/json" },
@@ -83,7 +83,7 @@ const getBio = async (userId: string) => {
 };
 
 const draft = async (post: string, userId: string) => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/draft`, {
+  return await fetch(`https://networkserver-3ewc.onrender.com/draft`, {
     method: "POST",
     body: JSON.stringify({ post, userId }),
     headers: { "Content-Type": "application/json" },
@@ -92,7 +92,7 @@ const draft = async (post: string, userId: string) => {
   });
 };
 const getDraft = async (userId: string) => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/getDraft`, {
+  return await fetch(`https://networkserver-3ewc.onrender.com/getDraft`, {
     method: "POST",
     body: JSON.stringify({ userId }),
     headers: { "Content-Type": "application/json" },
@@ -101,7 +101,7 @@ const getDraft = async (userId: string) => {
   });
 };
 const deleteDraft = async (userId: string, draftId: string) => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/deleteDraft`, {
+  return await fetch(`https://networkserver-3ewc.onrender.com/deleteDraft`, {
     method: "POST",
     body: JSON.stringify({ userId, draftId }),
     headers: { "Content-Type": "application/json" },
@@ -116,7 +116,7 @@ const createPost = async (
   username: string,
   _id: string
 ) => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/createPost`, {
+  return await fetch(`https://networkserver-3ewc.onrender.com/createPost`, {
     method: "POST",
     body: JSON.stringify({ post, userId, username, _id }),
     headers: { "Content-Type": "application/json" },
@@ -125,7 +125,7 @@ const createPost = async (
   });
 };
 const getPosts = async (start: number, end: number) => {
-  return await fetch(`https://network-server-97072ea56d38.herokuapp.com/getPosts`, {
+  return await fetch(`https://networkserver-3ewc.onrender.com/getPosts`, {
     method: "POST",
     body: JSON.stringify({ start, end }),
     headers: { "Content-Type": "application/json" },

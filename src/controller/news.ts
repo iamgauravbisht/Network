@@ -1,6 +1,6 @@
 const getHighlights = async () => {
   return await fetch(
-    "https://network-server-97072ea56d38.herokuapp.com/getHeadlines",
+    "https://networkserver-3ewc.onrender.com/getHeadlines",
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
