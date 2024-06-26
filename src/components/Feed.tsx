@@ -17,6 +17,7 @@ export default function Feed() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null); // Add error state
   const [pageNumber, setPageNumber] = useState(1);
+  const [refresh, setRefresh] = useState(1);
   const targetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -68,11 +69,15 @@ export default function Feed() {
         observer.unobserve(targetRef.current);
       }
     };
-  }, [error, loading, pageNumber, posts]); // Add dependencies to avoid unnecessary re-renders
+  }, [error, loading, pageNumber, posts,refresh]); // Add dependencies to avoid unnecessary re-renders
+
+  const handleRefresh=()=>{
+    setRefresh((p)=>p+1);
+  }
 
   return (
     <div className="flex-1">
-      <PostBox />
+      <PostBox handleRefresh={handleRefresh} />
       {posts.length > 0 &&
         posts.map((post) => {
           // const time = new Date(post.date).toLocaleString();

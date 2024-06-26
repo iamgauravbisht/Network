@@ -12,15 +12,17 @@ import { useState } from "react";
 import { draft, createPost } from "@/controller/authController";
 import useMyContext from "../store/useMyContext";
 
-export default function PostBox() {
+export default function PostBox({handleRefresh}:{handleRefresh:()=>void}) {
   const { state } = useMyContext();
   const [postValue, setPostValue] = useState("");
+
 
   const saveAsDraft = async () => {
     try {
       const result = await draft(postValue, state.userId);
       console.log(result);
       setPostValue("");
+      handleRefresh();
     } catch (err) {
       console.log(err);
     }
