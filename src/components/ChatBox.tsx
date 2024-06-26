@@ -59,7 +59,7 @@ export default function ChatBox() {
 
   useEffect(() => {
     const s: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-      "https://network-server-97072ea56d38.herokuapp.com"
+      "https://networkserver-3ewc.onrender.com"
     );
     setSocket(s);
     return () => {
